@@ -28,4 +28,4 @@ Visualize as especificações do projeto: [Especificações Gerador Gráfico de 
 
 Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE) para mais detalhes.
 
-[⬆ Voltar ao topo](#-gerador-gráfico-de-relatório)<br>
+[⬆ Voltar ao topo](#%EF%B8%8F-gerador-gráfico-de-relatório)<br>
