@@ -11,8 +11,12 @@
 
 O projeto se propõe a criar uma DSL (Domain Specific Language). A atividade contribuirá para a consolidação da aprendizagem teórica da disciplina, onde iremos implementar o Frontend e Backend de uma linguagem. 
 
-![Tela Inicial do Gerador](images/tela-inicial-gerador.png)
-![Tela de Consultas do Gerador](images/tela-consultas-gerador.png)
+<div align="center">
+
+  ![Tela Inicial do Gerador](images/tela-inicial-gerador.png)
+  </br>
+  ![Tela de Consultas do Gerador](images/tela-consultas-gerador.png)
+</div>
 
 > Telas da Linguagem de Domínio Específico.
 
