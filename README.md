@@ -34,7 +34,7 @@ Para usar a DSL, siga estas etapas:
 
 1. Faça o Download do ANTLR:
     * Navegue até o site do [ANTLR](https://www.antlr.org/) e realize o Download da versão desejada. </br>
-    Este tutorial no Youtube ajuda no processo: ![ANTLR Set up for Loading Parse Tree | Windows | English Tutorial](https://www.youtube.com/watch?v=p2gIBPz69DM)
+    Este tutorial no Youtube ajuda no processo: [ANTLR Set up for Loading Parse Tree | Windows | English Tutorial](https://www.youtube.com/watch?v=p2gIBPz69DM)
 1. Clone este Projeto:
     * Use o comando para clonar o projeto
       ```git
