@@ -47,7 +47,8 @@ Para usar a DSL, siga estas etapas:
       antlr -o src-gen GeradorRelatorio.g4
       ```
       > O ANTLR se encarrega de executar o arquivo `GeradorRelatorio.g4` e gera arquivos java necessários para a gramática dada. (Destino dos arquivos é uma pasta chamada `src-gen`
-    ![Demonstração no Terminal](images/comando-terminal.png)
+      
+     ![Demonstração no Terminal](images/comando-terminal.png)
  1. Configurar Diretório:
      * Localize o diretório `src-gen` na aba de projetos e clique com o botão direito do mouse
      * Selecione a opção `Mark Directory as` e depois clique em `Sources root`
