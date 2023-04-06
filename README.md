@@ -33,7 +33,7 @@ Visualize as especificações do projeto: [Especificações Gerador Gráfico de 
 Para usar a DSL, siga estas etapas:
 
 1. Crie um codespace:
-    * Clique em "Code" e depois na opção "Create codespace on <branch>", onde <branch> é a branch em que se está trabalhando no momento
+    * Clique em "Code" e depois na opção "Create codespace on <branch>", onde <branch> é a branch em que se está trabalhando no momento </br>
     ![Criação do Codespace](images/criar-codespace.png)
 1. Compilar a descrição da linguagem fonte:
     * Use o seguinte comando
