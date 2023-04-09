@@ -5,7 +5,6 @@
 ## ℹ Tabela de Conteúdos
 - [Descrição do Projeto](#dart-projeto-da-cadeira-de-compiladores-20222)
 - [Especificações](#-especificações-do-projeto)
-- [Protótipo do Projeto - Figma](https://www.figma.com/proto/hDs7IpLgYHRi0fEVKPUU5L/PROJETO-DSL?node-id=31-4&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=31%3A4)
 
 ## :dart: Projeto da Cadeira de Compiladores 2022.2
 
