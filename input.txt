@@ -1,0 +1,2 @@
+EXCEL:BASE_DE_DADOS.xlsx;
+COLUNA: Curso,Nome_aluno,CPF

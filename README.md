@@ -45,15 +45,14 @@ Para usar a DSL, siga estas etapas:
 1. Compilar programas em Java:
    * Use o seguinte comando
       ```shell
-      javac -cp antlr.jar:. -d classes src/*.java src-gen/*.java
+      javac -cp antlr.jar:fillo.jar:. -d classes src/*.java src-gen/*.java
       ```
-      > O comando acima executa o compilador Java. O arquivo antlr.jar, que contem as bibliotecas runtime utilizadas pelo código gerado pelo antlr são adicionadas ao CLASSPATH. O compilador compila todos os arquivos java que estão no diretório "src" (arquivo escritos pelo programador) e no diretório "src-gen" (arquivos gerados automáticamente).
+      > O comando acima executa o compilador Java. O arquivo antlr.jar, que contem as bibliotecas runtime utilizadas pelo código gerado pelo antlr são adicionadas ao CLASSPATH. O compilador compila todos os arquivos java que estão no diretório "src" (arquivo escritos pelo programador) e no diretório "src-gen" (arquivos gerados automáticamente). Os arquivos binários compilados gerados pelo javac serão armazenados no diretório classes.
 
-O arquivos binários compilados gerados pelo javac serão armazenados no diretório classes.
 1. Executar o programa:
    * Use o seguinte comando
      ```shell
-      java -cp antlr.jar:classes Main
+      java -cp antlr.jar:fillo.jar:classes Main
       ```
       > O comando acima executa a classe Main do compilador. Os arquivos binários das classes estão localizades no diretório "classes". Para a classe poder ser executada é necessário também incluir os arquivos do runtime do antlr.jar.
 
