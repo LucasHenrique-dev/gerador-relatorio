@@ -12,15 +12,6 @@
 O projeto se propõe a criar uma DSL (Domain Specific Language). A atividade contribuirá para a consolidação da aprendizagem teórica da disciplina, onde iremos implementar o Frontend e Backend de uma linguagem.
 A motivação por trás da construção dessa DSL é criar uma linguagem de alto nível, responsável por abstrair detalhes de implementação de consultas SQL em arquivos Excel (.xlsx).
 
-<div align="center">
-
-  ![Tela Inicial do Gerador](images/tela-inicial-gerador.png)
-  </br>
-  ![Tela de Consultas do Gerador](images/tela-consultas-gerador.png)
-</div>
-
-> Telas da Linguagem de Domínio Específico.
-
 ## 📃 Especificações do Projeto
 
 Especificações incluem:
@@ -47,14 +38,14 @@ Para usar a DSL, siga estas etapas:
       ```shell
       javac -cp antlr.jar:fillo.jar:. -d classes src/*.java src-gen/*.java
       ```
-      > O comando acima executa o compilador Java. O arquivo antlr.jar, que contem as bibliotecas runtime utilizadas pelo código gerado pelo antlr são adicionadas ao CLASSPATH. O compilador compila todos os arquivos java que estão no diretório "src" (arquivo escritos pelo programador) e no diretório "src-gen" (arquivos gerados automáticamente). Os arquivos binários compilados gerados pelo javac serão armazenados no diretório classes.
+      > O comando acima executa o compilador Java. O arquivo antlr.jar, que contem as bibliotecas runtime utilizadas pelo código gerado pelo antlr são adicionadas ao CLASSPATH, assim como fillo.jar para poder utilizar a API de Excel para Java. O compilador compila todos os arquivos java que estão no diretório "src" (arquivo escritos pelo programador) e no diretório "src-gen" (arquivos gerados automáticamente). Os arquivos binários compilados gerados pelo javac serão armazenados no diretório classes.
 
 1. Executar o programa:
    * Use o seguinte comando
      ```shell
       java -cp antlr.jar:fillo.jar:classes Main
       ```
-      > O comando acima executa a classe Main do compilador. Os arquivos binários das classes estão localizades no diretório "classes". Para a classe poder ser executada é necessário também incluir os arquivos do runtime do antlr.jar.
+      > O comando acima executa a classe Main do compilador. Os arquivos binários das classes estão localizades no diretório "classes". Para a classe poder ser executada é necessário também incluir os arquivos do runtime do antlr.jar e fillo.jar.
 
 ## 📝 Licença
 
