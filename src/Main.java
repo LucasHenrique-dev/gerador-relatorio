@@ -65,6 +65,7 @@ public class Main {
             // System.out.printf("Filhos: %d\n",Quantidadefilhos);
             conectarExcel(t, excel);
             if (Quantidadefilhos > 3) query = new StringBuilder(avalie(t.getChild(3)));
+            else query = new StringBuilder("SELECT * " + query);
             if (Quantidadefilhos > 4) query = new StringBuilder(avalie(t.getChild(4)));
             if (Quantidadefilhos > 5) query = new StringBuilder(avalie(t.getChild(5)));
             
