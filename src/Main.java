@@ -79,7 +79,8 @@ public class Main {
         case "Str":
             return t.getText() + " " + query;
         case "Funcao":
-            return t.getText() + " " + query;
+            String funçao = t.getChild(0).getText()+" ";
+            return query + funçao;
         case "SeqSelect":
             for (int i = t.getChildCount() - 1; i >= 0; i--) {
                 String filho = t.getChild(i).getText();
