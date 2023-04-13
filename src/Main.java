@@ -100,7 +100,12 @@ public class Main {
             if (Quantidadefilhos > 2) query = new StringBuilder(avalie(t.getChild(3)));
             return "SELECT " + query;
         case "Where":
-            return query+"";
+            Quantidadefilhos = t.getChildCount();
+            query = new StringBuilder(avalie(t.getChild(1)));
+            if(Quantidadefilhos>2) {
+                query = new StringBuilder(avalie(t.getChild(3)));
+            }
+            return "WHERE " + query;
         case "Agrupar":
             return query+"";
         case "Count":
