@@ -107,7 +107,9 @@ public class Main {
             }
             return "WHERE " + query;
         case "Agrupar":
-            return query+"";
+            query = new StringBuilder(avalie(t.getChild(1)));
+
+            return "GROUP BY "+query;
         case "Count":
             return query+"";
         case "Crescente":
