@@ -54,28 +54,58 @@ public class Main {
     }
 
     public static String avalie(ParseTree t) throws FilloException {
-        int Quantidadefilhos;
+        int Quantidadefilhos = t.getChildCount();
         String ruleName = getRule(t);
         // System.out.printf("Regra: %s\n",ruleName);
+        String temporaryString = new String();
         switch (ruleName) {
-        case "Programa":
-            String excel = t.getChild(1).getText();
-            Quantidadefilhos = t.getChildCount();
-            
-            // System.out.printf("Filhos: %d\n",Quantidadefilhos);
-            conectarExcel(t, excel);
-            if (Quantidadefilhos > 3) query = new StringBuilder(avalie(t.getChild(3)));
-            else query = new StringBuilder("SELECT * " + query);
-            if (Quantidadefilhos > 4) query = new StringBuilder(avalie(t.getChild(4)));
-            if (Quantidadefilhos > 5) query = new StringBuilder(avalie(t.getChild(5)));
-            
-            return query + "FROM CONTROLE";
-        case "Igu":
-            return query+"";
-        case "SeqID":
-            return query+"";
-        case "SeqIgu":
-            return query+"";
+            case "Programa":
+                String excel = t.getChild(1).getText();
+                // System.out.printf("Filhos: %d\n",Quantidadefilhos);
+                conectarExcel(t, excel);
+                if (Quantidadefilhos > 3)
+                    query = new StringBuilder(avalie(t.getChild(3)));
+                else
+                    query = new StringBuilder("SELECT * " + query);
+                if (Quantidadefilhos > 4)
+                    query = new StringBuilder(avalie(t.getChild(4)));
+                if (Quantidadefilhos > 5)
+                    query = new StringBuilder(avalie(t.getChild(5)));
+
+                return query + "FROM CONTROLE";
+            case "Igu":
+                if (Quantidadefilhos == 3) {
+                    ParseTree childZero = t.getChild(0);
+                    ParseTree childTwo = t.getChild(2);
+                    // if(getRule(childZero).equals("SeqID") && (getRule(childTwo).equals("SeqID")
+                    // || getRule(childTwo).equals("NUM")))
+                    // {
+                    query = new StringBuilder(avalie(childZero) + '=' + avalie(childTwo));
+                    // }
+                    // query = new StringBuilder(avalie(t.getChild(1))+'='+avalie(t,getchild(3)));
+                }
+                return "(" + query + ")";
+            case "SeqID":
+                temporaryString = "";
+                for (int i = 0; i < Quantidadefilhos; i++) {
+                    temporaryString += avalie(t.getChild(i));
+                    if (i != Quantidadefilhos - 1) {
+                        temporaryString += ',';
+                    }
+                    query = new StringBuilder(temporaryString);
+                }
+                return "(" + query + ")";
+            case "SeqIgu":
+                // 0 = 2 ,
+                temporaryString = "";
+                for (int i = 0; i < Quantidadefilhos; i += 5) {
+                    temporaryString += avalie(t.getChild(i)) + "=" + avalie(t.getChild(i + 2));
+                    if (i != Quantidadefilhos - 1) {
+                        temporaryString += ',';
+                    }
+                }
+                query = new StringBuilder(temporaryString);
+                return "(" + query + ")";
         case "Str":
             return t.getText() + " " + query;
         case "Funcao":
