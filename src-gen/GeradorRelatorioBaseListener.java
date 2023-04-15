@@ -28,13 +28,25 @@ public class GeradorRelatorioBaseListener implements GeradorRelatorioListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIgu(GeradorRelatorioParser.IguContext ctx) { }
+	@Override public void enterIguID(GeradorRelatorioParser.IguIDContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIgu(GeradorRelatorioParser.IguContext ctx) { }
+	@Override public void exitIguID(GeradorRelatorioParser.IguIDContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIguNum(GeradorRelatorioParser.IguNumContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIguNum(GeradorRelatorioParser.IguNumContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

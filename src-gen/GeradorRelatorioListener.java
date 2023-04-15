@@ -19,17 +19,29 @@ public interface GeradorRelatorioListener extends ParseTreeListener {
 	 */
 	void exitPrograma(GeradorRelatorioParser.ProgramaContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Igu}
+	 * Enter a parse tree produced by the {@code IguID}
 	 * labeled alternative in {@link GeradorRelatorioParser#igualdade}.
 	 * @param ctx the parse tree
 	 */
-	void enterIgu(GeradorRelatorioParser.IguContext ctx);
+	void enterIguID(GeradorRelatorioParser.IguIDContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Igu}
+	 * Exit a parse tree produced by the {@code IguID}
 	 * labeled alternative in {@link GeradorRelatorioParser#igualdade}.
 	 * @param ctx the parse tree
 	 */
-	void exitIgu(GeradorRelatorioParser.IguContext ctx);
+	void exitIguID(GeradorRelatorioParser.IguIDContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code IguNum}
+	 * labeled alternative in {@link GeradorRelatorioParser#igualdade}.
+	 * @param ctx the parse tree
+	 */
+	void enterIguNum(GeradorRelatorioParser.IguNumContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code IguNum}
+	 * labeled alternative in {@link GeradorRelatorioParser#igualdade}.
+	 * @param ctx the parse tree
+	 */
+	void exitIguNum(GeradorRelatorioParser.IguNumContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code SeqID}
 	 * labeled alternative in {@link GeradorRelatorioParser#sequenciaID}.

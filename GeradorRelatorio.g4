@@ -12,7 +12,8 @@ program
     ;
 
 igualdade
-    : ID '=' (ID | NUM)                             #Igu
+    : ID '=' ID                                    #IguID
+    | ID '=' NUM                                   #IguNum
     ;
 
 sequenciaID
