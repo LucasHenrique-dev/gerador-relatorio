@@ -148,13 +148,13 @@ public class GeradorRelatorioBaseListener implements GeradorRelatorioListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCrescente(GeradorRelatorioParser.CrescenteContext ctx) { }
+	@Override public void enterAscendente(GeradorRelatorioParser.AscendenteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCrescente(GeradorRelatorioParser.CrescenteContext ctx) { }
+	@Override public void exitAscendente(GeradorRelatorioParser.AscendenteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -167,6 +167,18 @@ public class GeradorRelatorioBaseListener implements GeradorRelatorioListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDecrescente(GeradorRelatorioParser.DecrescenteContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterOrdem(GeradorRelatorioParser.OrdemContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOrdem(GeradorRelatorioParser.OrdemContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

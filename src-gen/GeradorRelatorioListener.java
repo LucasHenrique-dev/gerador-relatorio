@@ -139,29 +139,41 @@ public interface GeradorRelatorioListener extends ParseTreeListener {
 	 */
 	void exitCount(GeradorRelatorioParser.CountContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Crescente}
-	 * labeled alternative in {@link GeradorRelatorioParser#ordem}.
+	 * Enter a parse tree produced by the {@code Ascendente}
+	 * labeled alternative in {@link GeradorRelatorioParser#elemOrdem}.
 	 * @param ctx the parse tree
 	 */
-	void enterCrescente(GeradorRelatorioParser.CrescenteContext ctx);
+	void enterAscendente(GeradorRelatorioParser.AscendenteContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Crescente}
-	 * labeled alternative in {@link GeradorRelatorioParser#ordem}.
+	 * Exit a parse tree produced by the {@code Ascendente}
+	 * labeled alternative in {@link GeradorRelatorioParser#elemOrdem}.
 	 * @param ctx the parse tree
 	 */
-	void exitCrescente(GeradorRelatorioParser.CrescenteContext ctx);
+	void exitAscendente(GeradorRelatorioParser.AscendenteContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Decrescente}
-	 * labeled alternative in {@link GeradorRelatorioParser#ordem}.
+	 * labeled alternative in {@link GeradorRelatorioParser#elemOrdem}.
 	 * @param ctx the parse tree
 	 */
 	void enterDecrescente(GeradorRelatorioParser.DecrescenteContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code Decrescente}
-	 * labeled alternative in {@link GeradorRelatorioParser#ordem}.
+	 * labeled alternative in {@link GeradorRelatorioParser#elemOrdem}.
 	 * @param ctx the parse tree
 	 */
 	void exitDecrescente(GeradorRelatorioParser.DecrescenteContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Ordem}
+	 * labeled alternative in {@link GeradorRelatorioParser#ord}.
+	 * @param ctx the parse tree
+	 */
+	void enterOrdem(GeradorRelatorioParser.OrdemContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Ordem}
+	 * labeled alternative in {@link GeradorRelatorioParser#ord}.
+	 * @param ctx the parse tree
+	 */
+	void exitOrdem(GeradorRelatorioParser.OrdemContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Limit}
 	 * labeled alternative in {@link GeradorRelatorioParser#len}.

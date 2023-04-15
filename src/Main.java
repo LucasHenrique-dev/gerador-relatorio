@@ -54,38 +54,34 @@ public class Main {
     }
 
     public static String avalie(ParseTree t) throws FilloException {
-        int Quantidadefilhos = t.getChildCount();
+        int Quantidadefilhos;
         String ruleName = getRule(t);
         // System.out.printf("Regra: %s\n",ruleName);
         String temporaryString = new String();
         switch (ruleName) {
             case "Programa":
+                Quantidadefilhos = t.getChildCount();
+
                 String excel = t.getChild(1).getText();
                 // System.out.printf("Filhos: %d\n",Quantidadefilhos);
                 conectarExcel(t, excel);
+                if (Quantidadefilhos > 2)
+                    query = new StringBuilder(avalie(t.getChild(2)));
+                else
+                    query = new StringBuilder("SELECT * " + query + "FROM CONTROLE");
                 if (Quantidadefilhos > 3)
                     query = new StringBuilder(avalie(t.getChild(3)));
-                else
-                    query = new StringBuilder("SELECT * " + query);
                 if (Quantidadefilhos > 4)
                     query = new StringBuilder(avalie(t.getChild(4)));
-                if (Quantidadefilhos > 5)
-                    query = new StringBuilder(avalie(t.getChild(5)));
 
-                return query + "FROM CONTROLE";
+                return query+"";
             case "Igu":
-                if (Quantidadefilhos == 3) {
-                    ParseTree childZero = t.getChild(0);
-                    ParseTree childTwo = t.getChild(2);
-                    // if(getRule(childZero).equals("SeqID") && (getRule(childTwo).equals("SeqID")
-                    // || getRule(childTwo).equals("NUM")))
-                    // {
-                    query = new StringBuilder(avalie(childZero) + '=' + avalie(childTwo));
-                    // }
-                    // query = new StringBuilder(avalie(t.getChild(1))+'='+avalie(t,getchild(3)));
-                }
-                return "(" + query + ")";
+                String childZero = t.getChild(0).getText();
+                String childTwo = t.getChild(2).getText();
+                
+                return query + childZero + " = " + childTwo + " ";
             case "SeqID":
+                Quantidadefilhos = t.getChildCount();
                 temporaryString = "";
                 for (int i = 0; i < Quantidadefilhos; i++) {
                     temporaryString += avalie(t.getChild(i));
@@ -96,16 +92,18 @@ public class Main {
                 }
                 return "(" + query + ")";
             case "SeqIgu":
-                // 0 = 2 ,
-                temporaryString = "";
-                for (int i = 0; i < Quantidadefilhos; i += 5) {
-                    temporaryString += avalie(t.getChild(i)) + "=" + avalie(t.getChild(i + 2));
-                    if (i != Quantidadefilhos - 1) {
-                        temporaryString += ',';
+                Quantidadefilhos = t.getChildCount();
+                for (int i = Quantidadefilhos - 1; i >= 0; i--) {
+                    String filho = t.getChild(i).getText();
+                    
+                    if (filho.equals(",")) query.insert(0, ", ");
+                    else {
+                        // System.out.printf("Filho: %s\n", t.getChild(i).getText());
+                        query = new StringBuilder(avalie(t.getChild(i)));
                     }
                 }
-                query = new StringBuilder(temporaryString);
-                return "(" + query + ")";
+            
+            return query+"";
         case "Str":
             return t.getText() + " " + query;
         case "Funcao":
@@ -125,17 +123,19 @@ public class Main {
             return query+"";
         case "Select":
             Quantidadefilhos = t.getChildCount();
-            query = new StringBuilder(avalie(t.getChild(1)));
+            query = new StringBuilder(avalie(t.getChild(1)) + "FROM CONTROLE ");
 
-            if (Quantidadefilhos > 2) query = new StringBuilder(avalie(t.getChild(3)));
+            if (Quantidadefilhos > 2) query = new StringBuilder(avalie(t.getChild(2)));
             return "SELECT " + query;
         case "Where":
             Quantidadefilhos = t.getChildCount();
+            query.append("WHERE ");
             query = new StringBuilder(avalie(t.getChild(1)));
-            if(Quantidadefilhos>2) {
-                query = new StringBuilder(avalie(t.getChild(3)));
+
+            if(Quantidadefilhos > 2) {
+                query = new StringBuilder(avalie(t.getChild(2)));
             }
-            return "WHERE " + query;
+            return query+"";
         case "Agrupar":
             query = new StringBuilder(avalie(t.getChild(1)));
 
@@ -145,6 +145,8 @@ public class Main {
         case "Crescente":
             return query+"";
         case "Decrescente":
+            return query+"";
+        case "Ordem":
             return query+"";
         case "Limit":
             return query+"";
@@ -166,7 +168,7 @@ public class Main {
 
         query = new StringBuilder(avalie(tree));
         System.out.printf("Query: %s\n", query);
-
+        //query = new StringBuilder("SELECT CURSO , NOME_ALUNO , CPF FROM CONTROLEWHERE CPF = 0");
         recordset = connection.executeQuery(query+"");
 
         exibirQuerySQL(recordset);

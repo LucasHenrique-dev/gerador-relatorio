@@ -2,13 +2,13 @@ grammar GeradorRelatorio;
 
 //SÍMBOLOS TERMINAIS
 NUM: [0-9]+;
-ID: [a-zA-Z][a-zA-Z0-9-_.]+;
+ID: [a-zA-Z][a-zA-Z0-9 \-_.]+;
 
 ESPACO: [ \t\n\r]+ -> skip;
 
 //SÍMBOLOS NÃO TERMINAIS
 program
-    : 'EXCEL:' ID ';' slct? ordem? len?             #Programa
+    : 'EXCEL:' ID slct? ord? len?                  #Programa
     ;
 
 igualdade
@@ -48,11 +48,15 @@ fun
     : 'COUNT' '('ID')'                              #Count
     ;
 
-ordem
-    : 'ASC'                                         #Crescente
+elemOrdem
+    : 'ASC'                                         #Ascendente
     | 'DEC'                                         #Decrescente
+    ;
+    
+ord
+    : 'ORDEM:' elemOrdem                            #Ordem
     ;
 
 len
-    : 'LIMIT' NUM                                   #Limit
+    : 'LIMITE:' NUM                                 #Limit
     ;
