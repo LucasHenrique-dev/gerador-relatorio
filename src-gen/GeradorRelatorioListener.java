@@ -19,41 +19,209 @@ public interface GeradorRelatorioListener extends ParseTreeListener {
 	 */
 	void exitPrograma(GeradorRelatorioParser.ProgramaContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Igu}
-	 * labeled alternative in {@link GeradorRelatorioParser#igualdade}.
+	 * Enter a parse tree produced by the {@code IgualdadeID}
+	 * labeled alternative in {@link GeradorRelatorioParser#igu}.
 	 * @param ctx the parse tree
 	 */
-	void enterIgu(GeradorRelatorioParser.IguContext ctx);
+	void enterIgualdadeID(GeradorRelatorioParser.IgualdadeIDContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Igu}
-	 * labeled alternative in {@link GeradorRelatorioParser#igualdade}.
+	 * Exit a parse tree produced by the {@code IgualdadeID}
+	 * labeled alternative in {@link GeradorRelatorioParser#igu}.
 	 * @param ctx the parse tree
 	 */
-	void exitIgu(GeradorRelatorioParser.IguContext ctx);
+	void exitIgualdadeID(GeradorRelatorioParser.IgualdadeIDContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code SeqID}
-	 * labeled alternative in {@link GeradorRelatorioParser#sequenciaID}.
+	 * Enter a parse tree produced by the {@code IgualdadeNum}
+	 * labeled alternative in {@link GeradorRelatorioParser#igu}.
 	 * @param ctx the parse tree
 	 */
-	void enterSeqID(GeradorRelatorioParser.SeqIDContext ctx);
+	void enterIgualdadeNum(GeradorRelatorioParser.IgualdadeNumContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code SeqID}
-	 * labeled alternative in {@link GeradorRelatorioParser#sequenciaID}.
+	 * Exit a parse tree produced by the {@code IgualdadeNum}
+	 * labeled alternative in {@link GeradorRelatorioParser#igu}.
 	 * @param ctx the parse tree
 	 */
-	void exitSeqID(GeradorRelatorioParser.SeqIDContext ctx);
+	void exitIgualdadeNum(GeradorRelatorioParser.IgualdadeNumContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code SeqIgu}
-	 * labeled alternative in {@link GeradorRelatorioParser#sequenciaIgualdade}.
+	 * Enter a parse tree produced by the {@code ComparadorMaior}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
 	 * @param ctx the parse tree
 	 */
-	void enterSeqIgu(GeradorRelatorioParser.SeqIguContext ctx);
+	void enterComparadorMaior(GeradorRelatorioParser.ComparadorMaiorContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code SeqIgu}
-	 * labeled alternative in {@link GeradorRelatorioParser#sequenciaIgualdade}.
+	 * Exit a parse tree produced by the {@code ComparadorMaior}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
 	 * @param ctx the parse tree
 	 */
-	void exitSeqIgu(GeradorRelatorioParser.SeqIguContext ctx);
+	void exitComparadorMaior(GeradorRelatorioParser.ComparadorMaiorContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ComparadorMenor}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparadorMenor(GeradorRelatorioParser.ComparadorMenorContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ComparadorMenor}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparadorMenor(GeradorRelatorioParser.ComparadorMenorContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ComparadorMaiorIgual}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparadorMaiorIgual(GeradorRelatorioParser.ComparadorMaiorIgualContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ComparadorMaiorIgual}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparadorMaiorIgual(GeradorRelatorioParser.ComparadorMaiorIgualContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ComparadorMenorIgual}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparadorMenorIgual(GeradorRelatorioParser.ComparadorMenorIgualContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ComparadorMenorIgual}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparadorMenorIgual(GeradorRelatorioParser.ComparadorMenorIgualContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ComparadorIntervaloAberto}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparadorIntervaloAberto(GeradorRelatorioParser.ComparadorIntervaloAbertoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ComparadorIntervaloAberto}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparadorIntervaloAberto(GeradorRelatorioParser.ComparadorIntervaloAbertoContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ComparadorIntervaloFechado}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparadorIntervaloFechado(GeradorRelatorioParser.ComparadorIntervaloFechadoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ComparadorIntervaloFechado}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparadorIntervaloFechado(GeradorRelatorioParser.ComparadorIntervaloFechadoContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ComparadorIntervaloSemiabertoEsquerda}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparadorIntervaloSemiabertoEsquerda(GeradorRelatorioParser.ComparadorIntervaloSemiabertoEsquerdaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ComparadorIntervaloSemiabertoEsquerda}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparadorIntervaloSemiabertoEsquerda(GeradorRelatorioParser.ComparadorIntervaloSemiabertoEsquerdaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ComparadorIntervaloSemiabertoDireita}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparadorIntervaloSemiabertoDireita(GeradorRelatorioParser.ComparadorIntervaloSemiabertoDireitaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ComparadorIntervaloSemiabertoDireita}
+	 * labeled alternative in {@link GeradorRelatorioParser#comp}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparadorIntervaloSemiabertoDireita(GeradorRelatorioParser.ComparadorIntervaloSemiabertoDireitaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code NegacaoExcalmacao}
+	 * labeled alternative in {@link GeradorRelatorioParser#neg}.
+	 * @param ctx the parse tree
+	 */
+	void enterNegacaoExcalmacao(GeradorRelatorioParser.NegacaoExcalmacaoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code NegacaoExcalmacao}
+	 * labeled alternative in {@link GeradorRelatorioParser#neg}.
+	 * @param ctx the parse tree
+	 */
+	void exitNegacaoExcalmacao(GeradorRelatorioParser.NegacaoExcalmacaoContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code NegacaoNot}
+	 * labeled alternative in {@link GeradorRelatorioParser#neg}.
+	 * @param ctx the parse tree
+	 */
+	void enterNegacaoNot(GeradorRelatorioParser.NegacaoNotContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code NegacaoNot}
+	 * labeled alternative in {@link GeradorRelatorioParser#neg}.
+	 * @param ctx the parse tree
+	 */
+	void exitNegacaoNot(GeradorRelatorioParser.NegacaoNotContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code LikeDireita}
+	 * labeled alternative in {@link GeradorRelatorioParser#lk}.
+	 * @param ctx the parse tree
+	 */
+	void enterLikeDireita(GeradorRelatorioParser.LikeDireitaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code LikeDireita}
+	 * labeled alternative in {@link GeradorRelatorioParser#lk}.
+	 * @param ctx the parse tree
+	 */
+	void exitLikeDireita(GeradorRelatorioParser.LikeDireitaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code LikeEsquerda}
+	 * labeled alternative in {@link GeradorRelatorioParser#lk}.
+	 * @param ctx the parse tree
+	 */
+	void enterLikeEsquerda(GeradorRelatorioParser.LikeEsquerdaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code LikeEsquerda}
+	 * labeled alternative in {@link GeradorRelatorioParser#lk}.
+	 * @param ctx the parse tree
+	 */
+	void exitLikeEsquerda(GeradorRelatorioParser.LikeEsquerdaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code LikeDuplo}
+	 * labeled alternative in {@link GeradorRelatorioParser#lk}.
+	 * @param ctx the parse tree
+	 */
+	void enterLikeDuplo(GeradorRelatorioParser.LikeDuploContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code LikeDuplo}
+	 * labeled alternative in {@link GeradorRelatorioParser#lk}.
+	 * @param ctx the parse tree
+	 */
+	void exitLikeDuplo(GeradorRelatorioParser.LikeDuploContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code IsNull}
+	 * labeled alternative in {@link GeradorRelatorioParser#nul}.
+	 * @param ctx the parse tree
+	 */
+	void enterIsNull(GeradorRelatorioParser.IsNullContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code IsNull}
+	 * labeled alternative in {@link GeradorRelatorioParser#nul}.
+	 * @param ctx the parse tree
+	 */
+	void exitIsNull(GeradorRelatorioParser.IsNullContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code IsNotNull}
+	 * labeled alternative in {@link GeradorRelatorioParser#nul}.
+	 * @param ctx the parse tree
+	 */
+	void enterIsNotNull(GeradorRelatorioParser.IsNotNullContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code IsNotNull}
+	 * labeled alternative in {@link GeradorRelatorioParser#nul}.
+	 * @param ctx the parse tree
+	 */
+	void exitIsNotNull(GeradorRelatorioParser.IsNotNullContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Str}
 	 * labeled alternative in {@link GeradorRelatorioParser#elemSlct}.
@@ -67,29 +235,29 @@ public interface GeradorRelatorioListener extends ParseTreeListener {
 	 */
 	void exitStr(GeradorRelatorioParser.StrContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Funcao}
-	 * labeled alternative in {@link GeradorRelatorioParser#elemSlct}.
+	 * Enter a parse tree produced by the {@code SequenciaSelect}
+	 * labeled alternative in {@link GeradorRelatorioParser#seqSlct}.
 	 * @param ctx the parse tree
 	 */
-	void enterFuncao(GeradorRelatorioParser.FuncaoContext ctx);
+	void enterSequenciaSelect(GeradorRelatorioParser.SequenciaSelectContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Funcao}
-	 * labeled alternative in {@link GeradorRelatorioParser#elemSlct}.
+	 * Exit a parse tree produced by the {@code SequenciaSelect}
+	 * labeled alternative in {@link GeradorRelatorioParser#seqSlct}.
 	 * @param ctx the parse tree
 	 */
-	void exitFuncao(GeradorRelatorioParser.FuncaoContext ctx);
+	void exitSequenciaSelect(GeradorRelatorioParser.SequenciaSelectContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code SeqSelect}
-	 * labeled alternative in {@link GeradorRelatorioParser#sequenciaSelect}.
+	 * Enter a parse tree produced by the {@code From}
+	 * labeled alternative in {@link GeradorRelatorioParser#frm}.
 	 * @param ctx the parse tree
 	 */
-	void enterSeqSelect(GeradorRelatorioParser.SeqSelectContext ctx);
+	void enterFrom(GeradorRelatorioParser.FromContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code SeqSelect}
-	 * labeled alternative in {@link GeradorRelatorioParser#sequenciaSelect}.
+	 * Exit a parse tree produced by the {@code From}
+	 * labeled alternative in {@link GeradorRelatorioParser#frm}.
 	 * @param ctx the parse tree
 	 */
-	void exitSeqSelect(GeradorRelatorioParser.SeqSelectContext ctx);
+	void exitFrom(GeradorRelatorioParser.FromContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Select}
 	 * labeled alternative in {@link GeradorRelatorioParser#slct}.
@@ -103,6 +271,78 @@ public interface GeradorRelatorioListener extends ParseTreeListener {
 	 */
 	void exitSelect(GeradorRelatorioParser.SelectContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code Igualdade}
+	 * labeled alternative in {@link GeradorRelatorioParser#opWhr}.
+	 * @param ctx the parse tree
+	 */
+	void enterIgualdade(GeradorRelatorioParser.IgualdadeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Igualdade}
+	 * labeled alternative in {@link GeradorRelatorioParser#opWhr}.
+	 * @param ctx the parse tree
+	 */
+	void exitIgualdade(GeradorRelatorioParser.IgualdadeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Comparacao}
+	 * labeled alternative in {@link GeradorRelatorioParser#opWhr}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparacao(GeradorRelatorioParser.ComparacaoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Comparacao}
+	 * labeled alternative in {@link GeradorRelatorioParser#opWhr}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparacao(GeradorRelatorioParser.ComparacaoContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Negacao}
+	 * labeled alternative in {@link GeradorRelatorioParser#opWhr}.
+	 * @param ctx the parse tree
+	 */
+	void enterNegacao(GeradorRelatorioParser.NegacaoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Negacao}
+	 * labeled alternative in {@link GeradorRelatorioParser#opWhr}.
+	 * @param ctx the parse tree
+	 */
+	void exitNegacao(GeradorRelatorioParser.NegacaoContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Like}
+	 * labeled alternative in {@link GeradorRelatorioParser#opWhr}.
+	 * @param ctx the parse tree
+	 */
+	void enterLike(GeradorRelatorioParser.LikeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Like}
+	 * labeled alternative in {@link GeradorRelatorioParser#opWhr}.
+	 * @param ctx the parse tree
+	 */
+	void exitLike(GeradorRelatorioParser.LikeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Nulidade}
+	 * labeled alternative in {@link GeradorRelatorioParser#opWhr}.
+	 * @param ctx the parse tree
+	 */
+	void enterNulidade(GeradorRelatorioParser.NulidadeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Nulidade}
+	 * labeled alternative in {@link GeradorRelatorioParser#opWhr}.
+	 * @param ctx the parse tree
+	 */
+	void exitNulidade(GeradorRelatorioParser.NulidadeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code SequenciaWhere}
+	 * labeled alternative in {@link GeradorRelatorioParser#seqWhr}.
+	 * @param ctx the parse tree
+	 */
+	void enterSequenciaWhere(GeradorRelatorioParser.SequenciaWhereContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code SequenciaWhere}
+	 * labeled alternative in {@link GeradorRelatorioParser#seqWhr}.
+	 * @param ctx the parse tree
+	 */
+	void exitSequenciaWhere(GeradorRelatorioParser.SequenciaWhereContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code Where}
 	 * labeled alternative in {@link GeradorRelatorioParser#whr}.
 	 * @param ctx the parse tree
@@ -114,64 +354,4 @@ public interface GeradorRelatorioListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitWhere(GeradorRelatorioParser.WhereContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code Agrupar}
-	 * labeled alternative in {@link GeradorRelatorioParser#aggr}.
-	 * @param ctx the parse tree
-	 */
-	void enterAgrupar(GeradorRelatorioParser.AgruparContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code Agrupar}
-	 * labeled alternative in {@link GeradorRelatorioParser#aggr}.
-	 * @param ctx the parse tree
-	 */
-	void exitAgrupar(GeradorRelatorioParser.AgruparContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code Count}
-	 * labeled alternative in {@link GeradorRelatorioParser#fun}.
-	 * @param ctx the parse tree
-	 */
-	void enterCount(GeradorRelatorioParser.CountContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code Count}
-	 * labeled alternative in {@link GeradorRelatorioParser#fun}.
-	 * @param ctx the parse tree
-	 */
-	void exitCount(GeradorRelatorioParser.CountContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code Crescente}
-	 * labeled alternative in {@link GeradorRelatorioParser#ordem}.
-	 * @param ctx the parse tree
-	 */
-	void enterCrescente(GeradorRelatorioParser.CrescenteContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code Crescente}
-	 * labeled alternative in {@link GeradorRelatorioParser#ordem}.
-	 * @param ctx the parse tree
-	 */
-	void exitCrescente(GeradorRelatorioParser.CrescenteContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code Decrescente}
-	 * labeled alternative in {@link GeradorRelatorioParser#ordem}.
-	 * @param ctx the parse tree
-	 */
-	void enterDecrescente(GeradorRelatorioParser.DecrescenteContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code Decrescente}
-	 * labeled alternative in {@link GeradorRelatorioParser#ordem}.
-	 * @param ctx the parse tree
-	 */
-	void exitDecrescente(GeradorRelatorioParser.DecrescenteContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code Limit}
-	 * labeled alternative in {@link GeradorRelatorioParser#len}.
-	 * @param ctx the parse tree
-	 */
-	void enterLimit(GeradorRelatorioParser.LimitContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code Limit}
-	 * labeled alternative in {@link GeradorRelatorioParser#len}.
-	 * @param ctx the parse tree
-	 */
-	void exitLimit(GeradorRelatorioParser.LimitContext ctx);
 }
