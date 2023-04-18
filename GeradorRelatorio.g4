@@ -2,62 +2,78 @@ grammar GeradorRelatorio;
 
 //SÍMBOLOS TERMINAIS
 NUM: [0-9]+;
-ID: [a-zA-Z][a-zA-Z0-9 \-_.]+;
+ID: [a-zA-Z][a-zA-Z0-9 \-_]*;
+EXTENSAO: '.xlsx';
+APOSTROFO: ['];
 
 ESPACO: [ \t\n\r]+ -> skip;
 
 //SÍMBOLOS NÃO TERMINAIS
 program
-    : 'EXCEL:' ID slct? ord? len?                  #Programa
+    : 'EXCEL:' ID EXTENSAO frm slct?               #Programa
     ;
 
-igualdade
-    : ID '=' ID                                    #IguID
-    | ID '=' NUM                                   #IguNum
+igu
+    : ID '=' ID                                    #IgualdadeID
+    | ID '=' NUM                                   #IgualdadeNum
+    ;
+    
+comp
+    : ID '>' NUM                                   #ComparadorMaior
+    | ID '<' NUM                                   #ComparadorMenor
+    | ID '>=' NUM                                  #ComparadorMaiorIgual
+    | ID '<=' NUM                                  #ComparadorMenorIgual
+    | NUM '<' ID '<' NUM                           #ComparadorIntervaloAberto
+    | NUM '<=' ID '<=' NUM                         #ComparadorIntervaloFechado
+    | NUM '<' ID '<=' NUM                          #ComparadorIntervaloSemiabertoEsquerda
+    | NUM '<=' ID '<' NUM                          #ComparadorIntervaloSemiabertoDireita
     ;
 
-sequenciaID
-    : (ID ',')* ID                                  #SeqID
+neg
+    : ID '!=' ID                                   #NegacaoExcalmacao
+    | 'NOT' ID                                     #NegacaoNot
     ;
-
-sequenciaIgualdade
-    : (igualdade ',')* igualdade                    #SeqIgu
+    
+lk
+    : ID '=' APOSTROFO ID '..' APOSTROFO           #LikeDireita
+    | ID '=' APOSTROFO '..' ID APOSTROFO           #LikeEsquerda
+    | ID '=' APOSTROFO '..' ID '..' APOSTROFO      #LikeDuplo        
+    ;
+    
+nul
+    : ID '=' 'NULL'                                 #IsNull
+    | ID '!=' 'NULL'                                #IsNotNull
     ;
 
 elemSlct
     : ID                                            #Str
-    | fun                                           #Funcao
     ;
 
-sequenciaSelect
-    : (elemSlct ',')* elemSlct                      #SeqSelect
+seqSlct
+    : (elemSlct ',')* elemSlct                      #SequenciaSelect
+    ;
+    
+frm
+    : 'PAGINA:' ID                                  #From
     ;
 
 slct
-    : 'COLUNA:' sequenciaSelect whr?                #Select
-    ;
-
-whr
-    : 'RESTRICAO:' sequenciaIgualdade aggr?         #Where
-    ;
-
-aggr
-    : 'AGRUPAR:' sequenciaID                        #Agrupar
-    ;
-
-fun
-    : 'COUNT' '('ID')'                              #Count
-    ;
-
-elemOrdem
-    : 'ASC'                                         #Ascendente
-    | 'DEC'                                         #Decrescente
+    : 'COLUNA:' seqSlct whr?                        #Select
     ;
     
-ord
-    : 'ORDEM:' elemOrdem                            #Ordem
+opWhr
+    : igu                                           #Igualdade
+    | comp                                          #Comparacao
+    | neg                                           #Negacao
+    | lk                                            #Like
+    | nul                                           #Nulidade
+    ;
+    
+seqWhr
+    : (opWhr ',')* opWhr                            #SequenciaWhere
+    ;
+    
+whr
+    : 'RESTRICAO:' seqWhr                           #Where
     ;
 
-len
-    : 'LIMITE:' NUM                                 #Limit
-    ;

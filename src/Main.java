@@ -23,7 +23,7 @@ public class Main {
     ///////////////////////////////////////////////////
 
     //FUNCOES DE SUPORTE///////////////////////////////
-    static void conectarExcel(ParseTree t, String excel) throws FilloException {
+    static void conectarExcel(String excel) throws FilloException {
         System.out.printf("Excel: %s\n",excel);
         connection = fillo.getConnection(excel);
     }
@@ -62,26 +62,108 @@ public class Main {
             case "Programa":
                 Quantidadefilhos = t.getChildCount();
 
-                String excel = t.getChild(1).getText();
+                String excel = t.getChild(1).getText().trim();
+                String extensao = t.getChild(2).getText();
+
                 // System.out.printf("Filhos: %d\n",Quantidadefilhos);
-                conectarExcel(t, excel);
-                if (Quantidadefilhos > 2)
-                    query = new StringBuilder(avalie(t.getChild(2)));
-                else
-                    query = new StringBuilder("SELECT * " + query + "FROM CONTROLE");
-                if (Quantidadefilhos > 3)
-                    query = new StringBuilder(avalie(t.getChild(3)));
+                conectarExcel(excel+extensao);
+
+                query = new StringBuilder(avalie(t.getChild(3)));
                 if (Quantidadefilhos > 4)
                     query = new StringBuilder(avalie(t.getChild(4)));
+                else query = new StringBuilder("SELECT * " + query);
 
                 return query+"";
-            case "IguID":
+            case "IgualdadeID":
 
                 return query + t.getChild(0).getText() + " = \'" + t.getChild(2).getText() + "\' ";
-            case "IguNum":
+            case "IgualdadeNum":
+                System.out.printf("Entrei IgualdadeNum\n");
+                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+            case "ComparadorMaior":
 
                 return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
-            case "SeqIgu":
+            case "ComparadorMenor":
+
+                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+            case "ComparadorMaiorIgual":
+
+                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+            case "ComparadorMenorIgual":
+
+                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+            case "ComparadorIntervaloAberto":
+
+                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+            case "ComparadorIntervaloFechado":
+
+                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+            case "ComparadorIntervaloSemiabertoEsquerda":
+
+                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+            case "ComparadorIntervaloSemiabertoDireita":
+
+                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+            case "NegacaoExcalmacao":
+
+                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+            case "NegacaoNot":
+
+                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+            case "LikeDireita":
+
+                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+            case "LikeEsquerda":
+
+                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+            case "LikeDuplo":
+
+                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+            case "IsNull":
+
+                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+            case "IsNotNull":
+
+                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+            case "Str":
+                return t.getText() + " " + query;
+            case "SequenciaSelect":
+                for (int i = t.getChildCount() - 1; i >= 0; i--) {
+                    String filho = t.getChild(i).getText();
+                    
+                    if (filho.equals(",")) query.insert(0, ", ");
+                    else {
+                        // System.out.printf("Filho: %s\n", t.getChild(i).getText());
+                        query = new StringBuilder(avalie(t.getChild(i)));
+                    }
+                }
+
+                return query+"";
+            case "From":
+
+                return query + "FROM " + t.getChild(1).getText() + " ";
+            case "Select":
+                Quantidadefilhos = t.getChildCount();
+                query = new StringBuilder("SELECT " + avalie(t.getChild(1)));
+
+                if (Quantidadefilhos > 2) query = new StringBuilder(avalie(t.getChild(2)));
+                return query+"";
+            case "Igualdade":
+
+                return avalie(t.getChild(0));
+            case "Comparacao":
+
+                return avalie(t.getChild(0));
+            case "Negacao":
+
+                return avalie(t.getChild(0));
+            case "Like":
+
+                return avalie(t.getChild(0));
+            case "Nulidade":
+
+                return avalie(t.getChild(0));
+            case "SequenciaWhere":
                 Quantidadefilhos = t.getChildCount();
                 for (int i = 0; i < Quantidadefilhos; i++) {
                     String filho = t.getChild(i).getText();
@@ -93,38 +175,13 @@ public class Main {
                     }
                 }
             
-            return query+"";
-        case "Str":
-            return t.getText() + " " + query;
-        case "SeqSelect":
-            for (int i = t.getChildCount() - 1; i >= 0; i--) {
-                String filho = t.getChild(i).getText();
+                return query+"";
+            case "Where":
+                query.append("WHERE ");
                 
-                if (filho.equals(",")) query.insert(0, ", ");
-                else {
-                    // System.out.printf("Filho: %s\n", t.getChild(i).getText());
-                    query = new StringBuilder(avalie(t.getChild(i)));
-                }
-            }
-
-            return query+"";
-        case "Select":
-            Quantidadefilhos = t.getChildCount();
-            query = new StringBuilder(avalie(t.getChild(1)) + "FROM CONTROLE ");
-
-            if (Quantidadefilhos > 2) query = new StringBuilder(avalie(t.getChild(2)));
-            return "SELECT " + query;
-        case "Where":
-            Quantidadefilhos = t.getChildCount();
-            query.append("WHERE ");
-            query = new StringBuilder(avalie(t.getChild(1)));
-
-            if(Quantidadefilhos > 2) {
-                query = new StringBuilder(avalie(t.getChild(2)));
-            }
-            return query+"";
-        default:
-            throw new RuntimeException("Nao sei compilar " + ruleName + " no codigo : " + t.getText());
+                return avalie(t.getChild(1));
+            default:
+                throw new RuntimeException("Nao ser compilar " + ruleName + " no codigo : " + t.getText());
         }
 
     }
@@ -132,7 +189,6 @@ public class Main {
     public static void main(String args[]) throws Exception {
         // CharStream input = CharStreams.fromString("getTopEmpresasMaisContratam(5)");
         CharStream input = CharStreams.fromFileName("input.txt");
-        // CharStream input = CharStreams.fromString("getTopEmpresasMaisContratam(5)");
         GeradorRelatorioLexer lexer = new GeradorRelatorioLexer(input);
         CommonTokenStream tokens = new CommonTokenStream( lexer );
         GeradorRelatorioParser parser = new GeradorRelatorioParser( tokens );
@@ -141,7 +197,7 @@ public class Main {
 
         query = new StringBuilder(avalie(tree));
         System.out.printf("Query: %s\n", query);
-        query = new StringBuilder("SELECT CPF FROM CONTROLE ASC");
+        //query = new StringBuilder("SELECT DISTINCT curso FROM CONTROLE");
         recordset = connection.executeQuery(query+"");
 
         exibirQuerySQL(recordset);
