@@ -12,25 +12,25 @@ import com.codoid.products.fillo.Recordset;
 
 public class Main {
 
-    //VARIAVEIS API EXCEL//////////////////////////////
+    // VARIAVEIS API EXCEL//////////////////////////////
     static Fillo fillo = new Fillo();
     static Connection connection;
     static Recordset recordset;
     ///////////////////////////////////////////////////
 
-    //VARIAVEIS SUPORTE////////////////////////////////
+    // VARIAVEIS SUPORTE////////////////////////////////
     static StringBuilder query = new StringBuilder();
     ///////////////////////////////////////////////////
 
-    //FUNCOES DE SUPORTE///////////////////////////////
+    // FUNCOES DE SUPORTE///////////////////////////////
     static void conectarExcel(String excel) throws FilloException {
-        System.out.printf("Excel: %s\n",excel);
+        System.out.printf("Excel: %s\n", excel);
         connection = fillo.getConnection(excel);
     }
 
-    static void exibirQuerySQL(Recordset recordset) throws FilloException {       
+    static void exibirQuerySQL(Recordset recordset) throws FilloException {
         String[] colunas = recordset.getFieldNames().toArray(new String[0]);
-            
+
         // Itera sobre os registros do recordset
         while (recordset.next()) {
             // Exibe os valores de cada coluna
@@ -44,13 +44,14 @@ public class Main {
     ///////////////////////////////////////////////////
 
     static Pattern classNamePatern = Pattern.compile("[a-zA-Z]+[$]([A-Za-z]+)Context");
+
     static String getRule(ParseTree t) {
-       String className = t.getClass().getName();
-       Matcher m = classNamePatern.matcher(className);
-       if (m.find()) {
-         return m.group(1);
-       }
-       return null;
+        String className = t.getClass().getName();
+        Matcher m = classNamePatern.matcher(className);
+        if (m.find()) {
+            return m.group(1);
+        }
+        return null;
     }
 
     public static String avalie(ParseTree t) throws FilloException {
@@ -66,14 +67,15 @@ public class Main {
                 String extensao = t.getChild(2).getText();
 
                 // System.out.printf("Filhos: %d\n",Quantidadefilhos);
-                conectarExcel(excel+extensao);
+                conectarExcel(excel + extensao);
 
                 query = new StringBuilder(avalie(t.getChild(3)));
                 if (Quantidadefilhos > 4)
                     query = new StringBuilder(avalie(t.getChild(4)));
-                else query = new StringBuilder("SELECT * " + query);
+                else
+                    query = new StringBuilder("SELECT * " + query);
 
-                return query+"";
+                return query + "";
             case "IgualdadeID":
 
                 return query + t.getChild(0).getText() + " = \'" + t.getChild(2).getText() + "\' ";
@@ -120,25 +122,26 @@ public class Main {
 
                 return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
             case "IsNull":
-
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+                query = new StringBuilder(avalie(t.getChild(0)));
+                return query + "is" + "NULL";
             case "IsNotNull":
-
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+                query = new StringBuilder(avalie(t.getChild(0)));
+                return query + " is not " + "NULL";
             case "Str":
                 return t.getText() + " " + query;
             case "SequenciaSelect":
                 for (int i = t.getChildCount() - 1; i >= 0; i--) {
                     String filho = t.getChild(i).getText();
-                    
-                    if (filho.equals(",")) query.insert(0, ", ");
+
+                    if (filho.equals(","))
+                        query.insert(0, ", ");
                     else {
                         // System.out.printf("Filho: %s\n", t.getChild(i).getText());
                         query = new StringBuilder(avalie(t.getChild(i)));
                     }
                 }
 
-                return query+"";
+                return query + "";
             case "From":
 
                 return query + "FROM " + t.getChild(1).getText() + " ";
@@ -146,8 +149,9 @@ public class Main {
                 Quantidadefilhos = t.getChildCount();
                 query = new StringBuilder("SELECT " + avalie(t.getChild(1)));
 
-                if (Quantidadefilhos > 2) query = new StringBuilder(avalie(t.getChild(2)));
-                return query+"";
+                if (Quantidadefilhos > 2)
+                    query = new StringBuilder(avalie(t.getChild(2)));
+                return query + "";
             case "Igualdade":
 
                 return avalie(t.getChild(0));
@@ -168,17 +172,18 @@ public class Main {
                 for (int i = 0; i < Quantidadefilhos; i++) {
                     String filho = t.getChild(i).getText();
 
-                    if (filho.equals(",")) query.append("AND ");
+                    if (filho.equals(","))
+                        query.append("AND ");
                     else {
                         // System.out.printf("Filho: %s\n", t.getChild(i).getText());
                         query = new StringBuilder(avalie(t.getChild(i)));
                     }
                 }
-            
-                return query+"";
+
+                return query + "";
             case "Where":
                 query.append("WHERE ");
-                
+
                 return avalie(t.getChild(1));
             default:
                 throw new RuntimeException("Nao ser compilar " + ruleName + " no codigo : " + t.getText());
@@ -190,15 +195,15 @@ public class Main {
         // CharStream input = CharStreams.fromString("getTopEmpresasMaisContratam(5)");
         CharStream input = CharStreams.fromFileName("input.txt");
         GeradorRelatorioLexer lexer = new GeradorRelatorioLexer(input);
-        CommonTokenStream tokens = new CommonTokenStream( lexer );
-        GeradorRelatorioParser parser = new GeradorRelatorioParser( tokens );
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        GeradorRelatorioParser parser = new GeradorRelatorioParser(tokens);
         ParserRuleContext tree = parser.program();
         System.out.printf("Tree = %s\n", tree.toStringTree(parser));
 
         query = new StringBuilder(avalie(tree));
         System.out.printf("Query: %s\n", query);
-        //query = new StringBuilder("SELECT DISTINCT curso FROM CONTROLE");
-        recordset = connection.executeQuery(query+"");
+        // query = new StringBuilder("SELECT DISTINCT curso FROM CONTROLE");
+        recordset = connection.executeQuery(query + "");
 
         exibirQuerySQL(recordset);
 
