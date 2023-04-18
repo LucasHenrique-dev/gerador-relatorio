@@ -5,6 +5,7 @@
 ## ℹ Tabela de Conteúdos
 - [Descrição do Projeto](#dart-projeto-da-cadeira-de-compiladores-20222)
 - [Especificações](#-especificações-do-projeto)
+- [Como Usar](#-como-usar-a-dsl-no-codespaces)
 
 ## :dart: Projeto da Cadeira de Compiladores 2022.2
 
