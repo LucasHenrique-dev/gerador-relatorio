@@ -88,7 +88,20 @@ public class Main {
             case "ComparadorIntervaloFechado":
             case "ComparadorIntervaloSemiabertoEsquerda":
             case "ComparadorIntervaloSemiabertoDireita":
-                return query + t.getChild(0).getText() + t.getChild(1).getText() + t.getChild(2).getText() + t.getChild(3).getText() + t.getChild(4).getText()+" ";
+                String inversa ="";
+                String comparador = t.getChild(1).getText();
+                if(comparador.equals("<")){
+                    inversa = ">";
+                } else if (comparador.equals(">")){
+                    inversa = "<";
+                }else if (comparador.equals("<=")){
+                    inversa = ">=";
+                }else if (comparador.equals(">=")){
+                    inversa = "<=";
+                }
+                return query + t.getChild(2).getText()+inversa+t.getChild(0).getText()+" AND "
+                        +t.getChild(2).getText()+t.getChild(3).getText()+t.getChild(4)+" ";
+
             case "NegacaoExcalmacao":
 
                 return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
@@ -182,7 +195,7 @@ public class Main {
 
         query = new StringBuilder(avalie(tree));
         System.out.printf("Query: %s\n", query);
-        //query = new StringBuilder("SELECT DISTINCT curso FROM CONTROLE");
+       // query = new StringBuilder("SELECT CURSO , CPF FROM CONTROLE WHERE CURSO  = 'ENGENHARIA CIVIL' AND CPF > 10  AND CPF <200 ");
         recordset = connection.executeQuery(query+"");
 
         exibirQuerySQL(recordset);
