@@ -56,7 +56,6 @@ public class Main {
     public static String avalie(ParseTree t) throws FilloException {
         int Quantidadefilhos;
         String ruleName = getRule(t);
-        // System.out.printf("Regra: %s\n",ruleName);
         String temporaryString = new String();
         switch (ruleName) {
             case "Programa":
@@ -65,7 +64,6 @@ public class Main {
                 String excel = t.getChild(1).getText().trim();
                 String extensao = t.getChild(2).getText();
 
-                // System.out.printf("Filhos: %d\n",Quantidadefilhos);
                 conectarExcel(excel+extensao);
 
                 query = new StringBuilder(avalie(t.getChild(3)));
@@ -79,35 +77,38 @@ public class Main {
             case "IgualdadeNum":
                 System.out.printf("Entrei IgualdadeNum\n");
                 return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+
             case "ComparadorMaior":
             case "ComparadorMenor":
             case "ComparadorMaiorIgual":
             case "ComparadorMenorIgual":
                 return query + t.getChild(0).getText() + t.getChild(1).getText() + t.getChild(2).getText() + " ";
+
             case "ComparadorIntervaloAberto":
             case "ComparadorIntervaloFechado":
             case "ComparadorIntervaloSemiabertoEsquerda":
             case "ComparadorIntervaloSemiabertoDireita":
                 String inversa ="";
                 String comparador = t.getChild(1).getText();
+
                 if(comparador.equals("<")){
-                    inversa = ">";
+                    inversa = " > ";
                 } else if (comparador.equals(">")){
-                    inversa = "<";
+                    inversa = " < ";
                 }else if (comparador.equals("<=")){
-                    inversa = ">=";
+                    inversa = " >= ";
                 }else if (comparador.equals(">=")){
-                    inversa = "<=";
+                    inversa = " <= ";
                 }
+
                 return query + t.getChild(2).getText()+inversa+t.getChild(0).getText()+" AND "
                         +t.getChild(2).getText()+t.getChild(3).getText()+t.getChild(4)+" ";
+            case "NegacaoID":
 
-            case "NegacaoExcalmacao":
+                return query + t.getChild(0).getText() + " != "  + '\'' + t.getChild(2).getText() + '\'' + " ";
+            case "NegacaoNum":
 
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
-            case "NegacaoNot":
-
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+                return query + t.getChild(0).getText() + " != "  + t.getChild(2).getText() + " ";
             case "LikeDireita":
 
                 return query + t.getChild(0).getText() + "LIKE " + t.getChild(2).getText() + t.getChild(3).getText() + "%" + t.getChild(5).getText() + " ";
@@ -117,6 +118,7 @@ public class Main {
             case "LikeDuplo":
 
                 return query + t.getChild(0).getText() + " LIKE " + t.getChild(2).getText()+ "%" + t.getChild(4).getText() + "%" +  t.getChild(6).getText() + " ";
+
             case "IsNull":
             case "IsNotNull":
                 return query + t.getChild(0).getText() + " " + t.getChild(1).getText() + " " +  t.getChild(2).getText() + " ";
@@ -128,7 +130,6 @@ public class Main {
                     
                     if (filho.equals(",")) query.insert(0, ", ");
                     else {
-                        // System.out.printf("Filho: %s\n", t.getChild(i).getText());
                         query = new StringBuilder(avalie(t.getChild(i)));
                     }
                 }
@@ -149,20 +150,12 @@ public class Main {
 
                 if (Quantidadefilhos > 2) query = new StringBuilder(avalie(t.getChild(2)));
                 return query+"";
+
             case "Igualdade":
-
-                return avalie(t.getChild(0));
             case "Comparacao":
-
-                return avalie(t.getChild(0));
             case "Negacao":
-
-                return avalie(t.getChild(0));
             case "Like":
-
-                return avalie(t.getChild(0));
             case "Nulidade":
-
                 return avalie(t.getChild(0));
             case "SequenciaWhere":
                 Quantidadefilhos = t.getChildCount();
@@ -171,7 +164,6 @@ public class Main {
 
                     if (filho.equals(",")) query.append("AND ");
                     else {
-                        // System.out.printf("Filho: %s\n", t.getChild(i).getText());
                         query = new StringBuilder(avalie(t.getChild(i)));
                     }
                 }
@@ -184,12 +176,10 @@ public class Main {
             default:
                 throw new RuntimeException("Nao ser compilar " + ruleName + " no codigo : " + t.getText());
         }
-
     }
 
     public static void main(String args[]) throws Exception {
-        // CharStream input = CharStreams.fromString("getTopEmpresasMaisContratam(5)");
-        CharStream input = CharStreams.fromFileName("input.txt");
+        CharStream input = CharStreams.fromFileName("input2.txt");
         GeradorRelatorioLexer lexer = new GeradorRelatorioLexer(input);
         CommonTokenStream tokens = new CommonTokenStream( lexer );
         GeradorRelatorioParser parser = new GeradorRelatorioParser( tokens );
@@ -198,7 +188,7 @@ public class Main {
 
         query = new StringBuilder(avalie(tree));
         System.out.printf("Query: %s\n", query);
-        //query = new StringBuilder("SELECT DISTINCT curso FROM CONTROLE");
+
         recordset = connection.executeQuery(query+"");
 
         exibirQuerySQL(recordset);
