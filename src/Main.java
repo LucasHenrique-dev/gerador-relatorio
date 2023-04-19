@@ -75,35 +75,20 @@ public class Main {
 
                 return query+"";
             case "IgualdadeID":
-
                 return query + t.getChild(0).getText() + " = \'" + t.getChild(2).getText() + "\' ";
             case "IgualdadeNum":
                 System.out.printf("Entrei IgualdadeNum\n");
                 return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
             case "ComparadorMaior":
-
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
             case "ComparadorMenor":
-
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
             case "ComparadorMaiorIgual":
-
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
             case "ComparadorMenorIgual":
-
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+                return query + t.getChild(0).getText() + t.getChild(1).getText() + t.getChild(2).getText() + " ";
             case "ComparadorIntervaloAberto":
-
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
             case "ComparadorIntervaloFechado":
-
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
             case "ComparadorIntervaloSemiabertoEsquerda":
-
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
             case "ComparadorIntervaloSemiabertoDireita":
-
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+                return query + t.getChild(0).getText() + t.getChild(1).getText() + t.getChild(2).getText() + t.getChild(3).getText() + t.getChild(4).getText()+" ";
             case "NegacaoExcalmacao":
 
                 return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
@@ -188,7 +173,7 @@ public class Main {
 
     public static void main(String args[]) throws Exception {
         // CharStream input = CharStreams.fromString("getTopEmpresasMaisContratam(5)");
-        CharStream input = CharStreams.fromFileName("input.txt");
+        CharStream input = CharStreams.fromFileName("input2.txt");
         GeradorRelatorioLexer lexer = new GeradorRelatorioLexer(input);
         CommonTokenStream tokens = new CommonTokenStream( lexer );
         GeradorRelatorioParser parser = new GeradorRelatorioParser( tokens );
