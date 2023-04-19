@@ -110,19 +110,16 @@ public class Main {
                 return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
             case "LikeDireita":
 
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+                return query + t.getChild(0).getText() + "LIKE " + t.getChild(2).getText() + t.getChild(3).getText() + "%" + t.getChild(5).getText() + " ";
             case "LikeEsquerda":
 
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+                return query + t.getChild(0).getText() + "LIKE " + t.getChild(2).getText() + "%" + t.getChild(4).getText() + t.getChild(5).getText() + " ";
             case "LikeDuplo":
 
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+                return query + t.getChild(0).getText() + " LIKE " + t.getChild(2).getText()+ "%" + t.getChild(4).getText() + "%" +  t.getChild(6).getText() + " ";
             case "IsNull":
-
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
             case "IsNotNull":
-
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+                return query + t.getChild(0).getText() + " " + t.getChild(1).getText() + " " +  t.getChild(2).getText() + " ";
             case "Str":
                 return t.getText() + " " + query;
             case "SequenciaSelect":
@@ -141,6 +138,12 @@ public class Main {
 
                 return query + "FROM " + t.getChild(1).getText() + " ";
             case "Select":
+                Quantidadefilhos = t.getChildCount();
+                query = new StringBuilder("SELECT " + avalie(t.getChild(1)));
+
+                if (Quantidadefilhos > 2) query = new StringBuilder(avalie(t.getChild(2)));
+                return query+"";
+            case "SelectTudo":
                 Quantidadefilhos = t.getChildCount();
                 query = new StringBuilder("SELECT " + avalie(t.getChild(1)));
 
@@ -186,7 +189,7 @@ public class Main {
 
     public static void main(String args[]) throws Exception {
         // CharStream input = CharStreams.fromString("getTopEmpresasMaisContratam(5)");
-        CharStream input = CharStreams.fromFileName("input2.txt");
+        CharStream input = CharStreams.fromFileName("input.txt");
         GeradorRelatorioLexer lexer = new GeradorRelatorioLexer(input);
         CommonTokenStream tokens = new CommonTokenStream( lexer );
         GeradorRelatorioParser parser = new GeradorRelatorioParser( tokens );
@@ -195,7 +198,7 @@ public class Main {
 
         query = new StringBuilder(avalie(tree));
         System.out.printf("Query: %s\n", query);
-       // query = new StringBuilder("SELECT CURSO , CPF FROM CONTROLE WHERE CURSO  = 'ENGENHARIA CIVIL' AND CPF > 10  AND CPF <200 ");
+        //query = new StringBuilder("SELECT DISTINCT curso FROM CONTROLE");
         recordset = connection.executeQuery(query+"");
 
         exibirQuerySQL(recordset);
