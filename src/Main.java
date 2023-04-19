@@ -145,7 +145,7 @@ public class Main {
                 return query+"";
             case "SelectTudo":
                 Quantidadefilhos = t.getChildCount();
-                query = new StringBuilder("SELECT " + avalie(t.getChild(1)));
+                query = new StringBuilder("SELECT * " + query);
 
                 if (Quantidadefilhos > 2) query = new StringBuilder(avalie(t.getChild(2)));
                 return query+"";
