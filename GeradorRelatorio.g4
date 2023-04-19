@@ -2,19 +2,79 @@ grammar GeradorRelatorio;
 
 //SÍMBOLOS TERMINAIS
 NUM: [0-9]+;
-STRING: ["][a-zA-Z0-9 \\/:._]+["];
+ID: [a-zA-Z][a-zA-Z0-9 \-_]*;
+EXTENSAO: '.xlsx';
+APOSTROFO: ['];
 
-ESPACO: [ \t\n\r]+ -> skip ;
+ESPACO: [ \t\n\r]+ -> skip;
 
 //SÍMBOLOS NÃO TERMINAIS
 program
-    : exp+ EOF
+    : 'EXCEL:' ID EXTENSAO frm slct?               #Programa
     ;
 
-exp
-    : 'getTopEmpresasMaisContratam' '(' NUM ')' #getTop
-    | 'extrairDados' '(' STRING ')'             #extrairDados
-    | 'estagiosPorCurso' '(' STRING ')'         #estagiosCurso
+igu
+    : ID '=' ID                                    #IgualdadeID
+    | ID '=' NUM                                   #IgualdadeNum
+    ;
+    
+comp
+    : ID '>' NUM                                   #ComparadorMaior
+    | ID '<' NUM                                   #ComparadorMenor
+    | ID '>=' NUM                                  #ComparadorMaiorIgual
+    | ID '<=' NUM                                  #ComparadorMenorIgual
+    | NUM '<' ID '<' NUM                           #ComparadorIntervaloAberto
+    | NUM '<=' ID '<=' NUM                         #ComparadorIntervaloFechado
+    | NUM '<' ID '<=' NUM                          #ComparadorIntervaloSemiabertoEsquerda
+    | NUM '<=' ID '<' NUM                          #ComparadorIntervaloSemiabertoDireita
     ;
 
+neg
+    : ID '!=' ID                                   #NegacaoID
+    | ID '!=' NUM                                  #NegacaoNum
+    ;
+    
+lk
+    : ID '=' APOSTROFO ID '..' APOSTROFO           #LikeDireita
+    | ID '=' APOSTROFO '..' ID APOSTROFO           #LikeEsquerda
+    | ID '=' APOSTROFO '..' ID '..' APOSTROFO      #LikeDuplo        
+    ;
+    
+nul
+    : ID '=' 'NULL'                                 #IsNull
+    | ID '!=' 'NULL'                                #IsNotNull
+    ;
+
+elemSlct
+    : ID                                            #Str
+    ;
+
+seqSlct
+    : (elemSlct ',')* elemSlct                      #SequenciaSelect
+    ;
+    
+frm
+    : 'PAGINA:' ID                                  #From
+    ;
+
+slct
+    : 'COLUNA:' seqSlct whr?                        #Select
+    | 'COLUNA:' 'TUDO' whr?                         #SelectTudo
+    ;
+    
+opWhr
+    : igu                                           #Igualdade
+    | comp                                          #Comparacao
+    | neg                                           #Negacao
+    | lk                                            #Like
+    | nul                                           #Nulidade
+    ;
+    
+seqWhr
+    : (opWhr ',')* opWhr                            #SequenciaWhere
+    ;
+    
+whr
+    : 'RESTRICAO:' seqWhr                           #Where
+    ;
 

@@ -5,20 +5,12 @@
 ## ℹ Tabela de Conteúdos
 - [Descrição do Projeto](#dart-projeto-da-cadeira-de-compiladores-20222)
 - [Especificações](#-especificações-do-projeto)
-- [Protótipo do Projeto - Figma](https://www.figma.com/proto/hDs7IpLgYHRi0fEVKPUU5L/PROJETO-DSL?node-id=31-4&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=31%3A4)
+- [Como Usar](#-como-usar-a-dsl-no-codespaces)
 
 ## :dart: Projeto da Cadeira de Compiladores 2022.2
 
-O projeto se propõe a criar uma DSL (Domain Specific Language). A atividade contribuirá para a consolidação da aprendizagem teórica da disciplina, onde iremos implementar o Frontend e Backend de uma linguagem. 
-
-<div align="center">
-
-  ![Tela Inicial do Gerador](images/tela-inicial-gerador.png)
-  </br>
-  ![Tela de Consultas do Gerador](images/tela-consultas-gerador.png)
-</div>
-
-> Telas da Linguagem de Domínio Específico.
+O projeto se propõe a criar uma DSL (Domain Specific Language). A atividade contribuirá para a consolidação da aprendizagem teórica da disciplina, onde iremos implementar o Frontend e Backend de uma linguagem.
+A motivação por trás da construção dessa DSL é criar uma linguagem de alto nível, responsável por abstrair detalhes de implementação de consultas SQL em arquivos Excel (.xlsx).
 
 ## 📃 Especificações do Projeto
 
@@ -28,34 +20,52 @@ Especificações incluem:
 
 Visualize as especificações do projeto: [Especificações Gerador Gráfico de Relatório](especificacoes)
 
-## ☕ Como Usar a DSL no Intellij
+## ☕ Como Usar a DSL no Codespaces
 
 Para usar a DSL, siga estas etapas:
 
-1. Faça o Download do ANTLR:
-    * Navegue até o site do [ANTLR](https://www.antlr.org/) e realize o Download da versão desejada. </br>
-    Este tutorial no Youtube ajuda no processo: [ANTLR Set up for Loading Parse Tree | Windows | English Tutorial](https://www.youtube.com/watch?v=p2gIBPz69DM)
-1. Clone este Projeto:
-    * Use o comando para clonar o projeto
-      ```git
-      git clone https://github.com/LucasHenrique-dev/gerador-relatorio.git
-      ```
-1. Gerar os Arquivos Java:
-   * Abra o projeto no Intellij
-   * No terminal, digite:
+1. Crie um codespace:
+    * Clique em "Code" e depois na opção "Create codespace on <branch>", onde <branch> é a branch em que se está trabalhando no momento </br>
+    ![Criação do Codespace](images/criar-codespace.png)
+1. Compilar a descrição da linguagem fonte:
+    * Use o seguinte comando
       ```shell
-      antlr -o src-gen GeradorRelatorio.g4
+      java -jar antlr.jar -o src-gen GeradorRelatorio.g4
       ```
-      > O ANTLR se encarrega de executar o arquivo `GeradorRelatorio.g4` e gera arquivos java necessários para a gramática dada. (Destino dos arquivos é uma pasta chamada `src-gen`
-      
-     ![Demonstração no Terminal](images/comando-terminal.png)
- 1. Configurar Diretório:
-     * Localize o diretório `src-gen` na aba de projetos e clique com o botão direito do mouse
-     * Selecione a opção `Mark Directory as` e depois clique em `Sources root`
-     ![Configuração do Diretório](images/configurar-diretorio.png)
- 1. Executar código:
-     * Após essas configurações, basta editar a Main do diretório `src` e executar normalmente pelo Run
-     
+      > O comando acima executa o gerador ANTLR que converte a descrição da gramática (Expr.g4) em programas Java (Analisadores léxicos e sintáticos). Os códigos dos analisadores gerados serão armazendados na pasta src-gen.
+1. Compilar programas em Java:
+   * Use o seguinte comando
+      ```shell
+      javac -cp antlr.jar:fillo.jar:. -d classes src/*.java src-gen/*.java
+      ```
+      > O comando acima executa o compilador Java. O arquivo antlr.jar, que contem as bibliotecas runtime utilizadas pelo código gerado pelo antlr são adicionadas ao CLASSPATH, assim como fillo.jar para poder utilizar a API de Excel para Java. O compilador compila todos os arquivos java que estão no diretório "src" (arquivo escritos pelo programador) e no diretório "src-gen" (arquivos gerados automáticamente). Os arquivos binários compilados gerados pelo javac serão armazenados no diretório classes.
+
+1. Executar o programa:
+   * Use o seguinte comando
+     ```shell
+     java -cp antlr.jar:fillo.jar:classes Main
+     ```
+     > O comando acima executa a classe Main do compilador. Os arquivos binários das classes estão localizades no diretório "classes". Para a classe poder ser executada é necessário também incluir os arquivos do runtime do antlr.jar e fillo.jar.
+
+</br>
+   
+- Caso o objetivo seja apenas testar dados de entrada do sistema, altere o arquivo `input.txt` com a entrada o qual deseja testar e realize o 4° passo do fluxo principal.
+- Caso haja nescessidade de alterar algo na `Main.java`, realize os passos 3 e 4 do fluxo principal. Além disso, pode-se usar os seguintes comandos para simplificar a execução do projeto:
+   1. Configurar permissões do projeto:
+      * Use o seguinte comando
+        ```shell
+        chmod 777 ./EXECUTEME.sh
+        ```
+        > O comando acima permite o usuário ler, escrever e executar o arquivo EXECUTEME.sh o qual encapsula os comandos dos passos 3 e 4 do fluxo principal.
+   1. Executar o programa:
+      * Use o seguinte comando
+        ```shell
+        ./EXECUTEME.sh
+        ```
+        > O comando acima permitirá testar a DSL implementada.
+   
+- Caso haja alterações na gramática do sistema, `GeradorRelatorio.g4`, realize os passos 2, 3 e 4 do fluxo principal.
+
 ## 📝 Licença
 
 Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE) para mais detalhes.
