@@ -30,8 +30,8 @@ comp
     ;
 
 neg
-    : ID '!=' ID                                   #NegacaoExcalmacao
-    | 'NOT' ID                                     #NegacaoNot
+    : ID '!=' ID                                   #NegacaoID
+    | ID '!=' NUM                                  #NegacaoNum
     ;
     
 lk
@@ -59,6 +59,7 @@ frm
 
 slct
     : 'COLUNA:' seqSlct whr?                        #Select
+    | 'COLUNA:' 'TUDO' whr?                         #SelectTudo
     ;
     
 opWhr

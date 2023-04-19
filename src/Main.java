@@ -104,27 +104,24 @@ public class Main {
             case "ComparadorIntervaloSemiabertoDireita":
 
                 return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
-            case "NegacaoExcalmacao":
+            case "NegacaoID":
 
                 return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
-            case "NegacaoNot":
+            case "NegacaoNum":
 
                 return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
             case "LikeDireita":
 
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+                return query + t.getChild(0).getText() + "LIKE " + t.getChild(2).getText() + t.getChild(3).getText() + "%" + t.getChild(5).getText() + " ";
             case "LikeEsquerda":
 
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+                return query + t.getChild(0).getText() + "LIKE " + t.getChild(2).getText() + "%" + t.getChild(4).getText() + t.getChild(5).getText() + " ";
             case "LikeDuplo":
 
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+                return query + t.getChild(0).getText() + " LIKE " + t.getChild(2).getText()+ "%" + t.getChild(4).getText() + "%" +  t.getChild(6).getText() + " ";
             case "IsNull":
-
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
             case "IsNotNull":
-
-                return query + t.getChild(0).getText() + " = " + t.getChild(2).getText() + " ";
+                return query + t.getChild(0).getText() + " " + t.getChild(1).getText() + " " +  t.getChild(2).getText() + " ";
             case "Str":
                 return t.getText() + " " + query;
             case "SequenciaSelect":
@@ -143,6 +140,12 @@ public class Main {
 
                 return query + "FROM " + t.getChild(1).getText() + " ";
             case "Select":
+                Quantidadefilhos = t.getChildCount();
+                query = new StringBuilder("SELECT " + avalie(t.getChild(1)));
+
+                if (Quantidadefilhos > 2) query = new StringBuilder(avalie(t.getChild(2)));
+                return query+"";
+            case "SelectTudo":
                 Quantidadefilhos = t.getChildCount();
                 query = new StringBuilder("SELECT " + avalie(t.getChild(1)));
 

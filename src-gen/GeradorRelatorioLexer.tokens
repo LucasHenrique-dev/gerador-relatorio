@@ -24,11 +24,11 @@ ESPACO=19
 '>='=5
 '<='=6
 '!='=7
-'NOT'=8
-'..'=9
-'NULL'=10
-','=11
-'PAGINA:'=12
-'COLUNA:'=13
+'..'=8
+'NULL'=9
+','=10
+'PAGINA:'=11
+'COLUNA:'=12
+'TUDO'=13
 'RESTRICAO:'=14
 '.xlsx'=17

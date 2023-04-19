@@ -139,29 +139,29 @@ public interface GeradorRelatorioListener extends ParseTreeListener {
 	 */
 	void exitComparadorIntervaloSemiabertoDireita(GeradorRelatorioParser.ComparadorIntervaloSemiabertoDireitaContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code NegacaoExcalmacao}
+	 * Enter a parse tree produced by the {@code NegacaoID}
 	 * labeled alternative in {@link GeradorRelatorioParser#neg}.
 	 * @param ctx the parse tree
 	 */
-	void enterNegacaoExcalmacao(GeradorRelatorioParser.NegacaoExcalmacaoContext ctx);
+	void enterNegacaoID(GeradorRelatorioParser.NegacaoIDContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code NegacaoExcalmacao}
+	 * Exit a parse tree produced by the {@code NegacaoID}
 	 * labeled alternative in {@link GeradorRelatorioParser#neg}.
 	 * @param ctx the parse tree
 	 */
-	void exitNegacaoExcalmacao(GeradorRelatorioParser.NegacaoExcalmacaoContext ctx);
+	void exitNegacaoID(GeradorRelatorioParser.NegacaoIDContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code NegacaoNot}
+	 * Enter a parse tree produced by the {@code NegacaoNum}
 	 * labeled alternative in {@link GeradorRelatorioParser#neg}.
 	 * @param ctx the parse tree
 	 */
-	void enterNegacaoNot(GeradorRelatorioParser.NegacaoNotContext ctx);
+	void enterNegacaoNum(GeradorRelatorioParser.NegacaoNumContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code NegacaoNot}
+	 * Exit a parse tree produced by the {@code NegacaoNum}
 	 * labeled alternative in {@link GeradorRelatorioParser#neg}.
 	 * @param ctx the parse tree
 	 */
-	void exitNegacaoNot(GeradorRelatorioParser.NegacaoNotContext ctx);
+	void exitNegacaoNum(GeradorRelatorioParser.NegacaoNumContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code LikeDireita}
 	 * labeled alternative in {@link GeradorRelatorioParser#lk}.
@@ -270,6 +270,18 @@ public interface GeradorRelatorioListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSelect(GeradorRelatorioParser.SelectContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code SelectTudo}
+	 * labeled alternative in {@link GeradorRelatorioParser#slct}.
+	 * @param ctx the parse tree
+	 */
+	void enterSelectTudo(GeradorRelatorioParser.SelectTudoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code SelectTudo}
+	 * labeled alternative in {@link GeradorRelatorioParser#slct}.
+	 * @param ctx the parse tree
+	 */
+	void exitSelectTudo(GeradorRelatorioParser.SelectTudoContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Igualdade}
 	 * labeled alternative in {@link GeradorRelatorioParser#opWhr}.

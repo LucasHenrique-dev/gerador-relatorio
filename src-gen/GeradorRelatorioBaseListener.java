@@ -148,25 +148,25 @@ public class GeradorRelatorioBaseListener implements GeradorRelatorioListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNegacaoExcalmacao(GeradorRelatorioParser.NegacaoExcalmacaoContext ctx) { }
+	@Override public void enterNegacaoID(GeradorRelatorioParser.NegacaoIDContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNegacaoExcalmacao(GeradorRelatorioParser.NegacaoExcalmacaoContext ctx) { }
+	@Override public void exitNegacaoID(GeradorRelatorioParser.NegacaoIDContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNegacaoNot(GeradorRelatorioParser.NegacaoNotContext ctx) { }
+	@Override public void enterNegacaoNum(GeradorRelatorioParser.NegacaoNumContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNegacaoNot(GeradorRelatorioParser.NegacaoNotContext ctx) { }
+	@Override public void exitNegacaoNum(GeradorRelatorioParser.NegacaoNumContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -275,6 +275,18 @@ public class GeradorRelatorioBaseListener implements GeradorRelatorioListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSelect(GeradorRelatorioParser.SelectContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSelectTudo(GeradorRelatorioParser.SelectTudoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSelectTudo(GeradorRelatorioParser.SelectTudoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
